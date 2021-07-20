@@ -1,0 +1,28 @@
+{
+  "name": "@whi/subprocess",
+  "version": "0.1.0",
+  "description": "A node module that helps spawn child processes with deterministic controls",
+  "main": "src/index.js",
+  "files": [
+    "README.md",
+    "src/index.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Brisebois <matthew@webheroes.ca>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjbrisebois/node-subprocess/"
+  },
+  "dependencies": {
+    "@whi/promise-timeout": "^0.1.0",
+    "@whi/stdlog": "^0.3.4"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.0.0",
+    "why-is-node-running": "^2.2.0"
+  }
+}
