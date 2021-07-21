@@ -1,6 +1,6 @@
 {
   "name": "@whi/subprocess",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A node module that helps spawn child processes with deterministic controls",
   "main": "src/index.js",
   "files": [
