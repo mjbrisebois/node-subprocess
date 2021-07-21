@@ -50,11 +50,11 @@ function basic_tests () {
 	//
 	let child			= new SubProcess( "python3", "-um", "http.server", "8888" );
 
-	child.stdout.on("line", line => {
+	child.stdout( line => {
 	    log.silly("\x1b[2;37m%s STDOUT\x1b[0;2m: %s\x1b[0m", "python3 http.server", line );
 	});
 
-	child.stderr.on("line", line => {
+	child.stderr( line => {
 	    log.silly("\x1b[2;31m%s STDERR\x1b[0;2m: %s\x1b[0m", "python3 http.server", line );
 	});
 
@@ -75,11 +75,11 @@ function basic_tests () {
     it("should start and stop ignorant daemon", async function () {
 	let child			= new SubProcess( "node", path.resolve( __dirname, "../ignorant_daemon.js" ) );
 
-	child.stdout.on("line", line => {
+	child.stdout( line => {
 	    log.silly("\x1b[2;37m%s STDOUT\x1b[0;2m: %s\x1b[0m", "ignorant_daemon.js", line );
 	});
 
-	child.stderr.on("line", line => {
+	child.stderr( line => {
 	    log.silly("\x1b[2;31m%s STDERR\x1b[0;2m: %s\x1b[0m", "ignorant_daemon.js", line );
 	});
 
@@ -99,11 +99,11 @@ function basic_tests () {
 	let child			= new SubProcess( "node", path.resolve( __dirname, "../ignorant_daemon.js" ) );
 
 	try {
-	    child.stdout.on("line", line => {
+	    child.stdout( line => {
 		log.silly("\x1b[2;37m%s STDOUT\x1b[0;2m: %s\x1b[0m", "ignorant_daemon.js", line );
 	    });
 
-	    child.stderr.on("line", line => {
+	    child.stderr( line => {
 		log.silly("\x1b[2;31m%s STDERR\x1b[0;2m: %s\x1b[0m", "ignorant_daemon.js", line );
 	    });
 

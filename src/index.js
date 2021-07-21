@@ -56,10 +56,10 @@ class SubProcess extends EventEmitter {
 	this.pid			= this._process.pid || null;
 
 
-	this.stdout			= readline.createInterface({
+	this._stdout			= readline.createInterface({
 	    input: this._process.stdout.setEncoding("utf8"),
 	});
-	this.stderr			= readline.createInterface({
+	this._stderr			= readline.createInterface({
 	    input: this._process.stderr.setEncoding("utf8"),
 	});
 
@@ -162,6 +162,28 @@ class SubProcess extends EventEmitter {
 	});
     }
 
+    stdout ( callback ) {
+	// We are doing this custom error handling to avoid the subtle "error" emit that causes
+	// confusing behavior.
+	this._stdout.on("line", function (line) {
+	    try {
+		return callback.call(this, line);
+	    } catch (err) {
+		log.error("STDOUT Readline Error => %s", err.stack );
+	    }
+	});
+    }
+
+    stderr ( callback ) {
+	this._stderr.on("line", function (line) {
+	    try {
+		return callback.call(this, line);
+	    } catch (err) {
+		log.error("STDERR Readline Error => %s", err.stack );
+	    }
+	});
+    }
+
     ready ( timeout ) {
 	if ( timeout === undefined )
 	    timeout			= this.options.timeout;
@@ -173,9 +195,9 @@ class SubProcess extends EventEmitter {
 	const self			= this;
 
 	if ( stream === undefined )
-	    stream			= this.stdout;
+	    stream			= this._stdout;
 	else if ( ["stdout", "stderr"].includes( stream ) )
-	    stream			= this[stream];
+	    stream			= this["_" + stream];
 	else
 	    throw new Error(`Unknown stream '${stream}'; must be stdout or stderr`);
 

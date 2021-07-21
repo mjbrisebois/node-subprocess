@@ -60,12 +60,15 @@ The first argument of the command array (aka: the executable path).
 The rest of the command arguments.
 
 
-### `<SubProcess>.stdout : readline.Interface`
+### `<SubProcess>.stdout( callback )`
 Emits each line coming from `stdout` of the child process.
+
+> If an error occurs in the callback, it is automatically printed using `console.error` and then
+> continues.  This is to avoid the uncaught "error" emit which causes non-deterministic exiting.
 
 Example usage
 ```javascript
-subprocess.stdout.on("line", line => {
+subprocess.stdout( line => {
     console.log( line );
 });
 ```
@@ -74,9 +77,12 @@ subprocess.stdout.on("line", line => {
 ### `<SubProcess>.stderr : readline.Interface`
 Emits each line coming from `stderr` of the child process.
 
+> If an error occurs in the callback, it is automatically printed using `console.error` and then
+> continues.  This is to avoid the uncaught "error" emit which causes non-deterministic exiting.
+
 Example usage
 ```javascript
-subprocess.stderr.on("line", line => {
+subprocess.stderr( line => {
     console.error( line );
 });
 ```

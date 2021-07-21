@@ -34,11 +34,11 @@ npm i @whi/subprocess
 ```javascript
 let subprocess = new SubProcess( "python3", "-um", "http.server", "8888" );
 
-subprocess.stdout.on("line", line => {
+subprocess.stdout( line => {
     console.log( line );
 });
 
-subprocess.stderr.on("line", line => {
+subprocess.stderr( line => {
     console.error( line );
 });
 
