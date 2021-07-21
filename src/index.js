@@ -169,7 +169,7 @@ class SubProcess extends EventEmitter {
 	    try {
 		return callback.call(this, line);
 	    } catch (err) {
-		log.error("STDOUT Readline Error => %s", err.stack );
+		console.error("STDOUT Readline Error => %s", err.stack );
 	    }
 	});
     }
@@ -179,7 +179,7 @@ class SubProcess extends EventEmitter {
 	    try {
 		return callback.call(this, line);
 	    } catch (err) {
-		log.error("STDERR Readline Error => %s", err.stack );
+		console.error("STDERR Readline Error => %s", err.stack );
 	    }
 	});
     }
